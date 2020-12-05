@@ -58,8 +58,8 @@ PHP_FUNCTION(trader_stochf)
 		Z_PARAM_LONG(optInFastD_MAType)
 	ZEND_PARSE_PARAMETERS_END_EX(RETURN_FALSE);
 #else
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "aaa|lll", &zinHigh, &zinLow, &zinClose, &optInFastK_Period, &optInFastD_Period, &optInFastD_MAType) == FAILURE) {
-		RETURN_FALSE
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "aaa|lll", &zinHigh, &zinLow, &zinClose, &optInFastK_Period, &optInFastD_Period, &optInFastD_MAType) == FAILURE) {
+		RETURN_FALSE;
 	}
 #endif
 
@@ -90,7 +90,7 @@ PHP_FUNCTION(trader_stochf)
 			efree(outFastK);
 			efree(outFastD);
 
-			RETURN_FALSE
+			RETURN_FALSE;
 		}
 
 		TRADER_DBL_ARR_TO_ZRET2(outFastK, outFastD, return_value, endIdx, outBegIdx, outNBElement)
@@ -104,7 +104,7 @@ PHP_FUNCTION(trader_stochf)
 		/* The current input args combination would cause TA-Lib to produce
 			 zero output, don't bother making any allocs or calls. */
 		TRADER_G(last_error) = TA_BAD_PARAM;
-		RETURN_FALSE
+		RETURN_FALSE;
 	}
 }
 /* }}} */
